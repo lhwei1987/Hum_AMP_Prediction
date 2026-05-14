@@ -1,0 +1,124 @@
+# 模型配置
+model:
+  name: "MultimodalCNN"
+  vocab_size: 22  # 20个标准氨基酸 + 'X' + '-'
+  use_tree_cache: true  # 是否使用树缓存
+  max_workers: 8        # 最大并行工作进程数
+  k: 3                     # k-mer长度
+  core_size: 100  # 核心序列数量
+  dropout_rate: 0.1
+  classifier_dims: [ 256, 128, 64 ]  # 添加这个新参数
+
+  # 特征提取相关
+  embedding_dim: 48  # 减小嵌入维度以提高效率
+  property_embed_dim: 32  # 减小属性嵌入维度
+  fusion_channels: 128  # 64+48+32=144 (原为64+48+8=120)
+  kernel_sizes: [3, 5, 7]  # 卷积核尺寸
+  enable_feature_visualization: true   #模型内部可视化
+
+  # 生物物理属性列表
+  property_names:
+    - hydrophobicity
+    - charge
+    - pI
+    - mw
+    - solubility
+    - vdw_volume
+    - asa
+    - fold_deltaG
+    - P_alpha
+    - P_beta
+    - P_turn
+
+  # 重要属性选择（下方选择属性用于精简模型,[]时为使用全部属性）
+  important_properties: []
+#    - charge
+#    - hydrophobicity
+#    - P_alpha
+#    - P_beta
+
+  # 贝叶斯模型配置
+  prior_sigma: 1.0  # 先验分布标准差
+  temperature_scaling: true  # 是否启用温度缩放
+
+# 数据配置
+data:
+  train_path: "data/processed/train.csv"
+  val_path: "data/processed/val.csv"
+  test_path: "data/processed/test.csv"
+  calib_path: "data/processed/calib.csv"  # 新增：不确定性校准数据集
+  max_seq_len: 50
+  augment: true
+  batch_size: 64
+  shuffle: True
+  num_workers: 2
+  tokenizer:
+
+
+# 训练配置
+training:
+  epochs: 100
+  learning_rate: 0.005
+  weight_decay: 0.001
+  pos_weight:  # 多任务类别不平衡处理
+    activity: 9.0
+    hemolysis: 0.5
+    stability: 0.5
+  patience: 15     # 早停等待轮数
+  delta: 0.0005     # 早停最小改善值
+  save_dir: "results"
+  log_interval: 50
+  kl_weight: 0.01  # KL散度损失的权重
+  pinn_weight: 0.1  # PINN损失的权重
+  pinn_decay: true  # 启用PINN权重衰减
+  uncertainty_samples: 30  # 不确定性估计的采样次数
+  focus_fpr: true       # 启用假阳性率优化模式
+  negative_weight: 1.0  # 负样本权重 (建议1.5-3.0)
+  fpr_target: 0.1       # 目标假阳性率 (0.1 = 10%)
+  val_interval: 1
+  grad_clip: 1.0  # 新增：梯度裁剪阈值
+  warmup_epochs: 3
+
+  # 任务权重
+  task_weights:
+    activity: 1.0
+    hemolysis: 0.1
+    stability: 0.1
+
+# 物理约束配置
+constraints:
+  charge_threshold: 1.5  # 最小电荷要求
+  hydrophobicity_range: [0.3, 0.7]  # 疏水性合理范围
+  amphipathicity_threshold: 0.05  # 最小疏水性方差
+  secondary_structure_threshold: 100  # 二级结构倾向性阈值
+  constraint_weights:  # 约束权重
+    charge: 0.3
+    hydrophobicity: 0.2
+    amphipathicity: 0.2
+    secondary_structure: 0.3
+
+# 分析配置
+analysis:
+  enable: true  # 启用训练时分析
+  importance_threshold: 0.05  # 特征剔除阈值
+  visualization: true  # 是否生成可视化图表
+  positional_impact: True   # 属性位置影响
+  token_positional_impact: True   # 序列token位置影响
+  shap_analysis: true  # 启用 SHAP 分析
+  shap_params:
+    n_samples: 500
+    max_samples: 50
+  attention_visualization: true  # 新增：注意力可视化
+
+
+# 部署配置
+deployment:
+  quantize: true  # 是否量化模型
+  onnx_export: true  # 是否导出ONNX模型
+  batch_inference_size: 32  # 推理批次大小
+
+# 显示配置
+show_progress: true  # 显示训练进度条
+log_level: "info"  # 日志级别 (debug, info, warning, error)
+
+

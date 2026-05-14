@@ -1,0 +1,137 @@
+{
+    "file_stats": {
+        "test.csv": {
+            "rows": 5082,
+            "columns": [
+                "sequence",
+                "length",
+                "label"
+            ],
+            "label_distribution": {
+                "0.0": "2586",
+                "1.0": "2496"
+            }
+        },
+        "train.csv": {
+            "rows": 45731,
+            "columns": [
+                "sequence",
+                "length",
+                "label"
+            ],
+            "label_distribution": {
+                "0.0": "23461",
+                "1.0": "22270"
+            }
+        }
+    },
+    "total_rows_before_dedup": 50813,
+    "quality_analysis": {
+        "null_counts": {
+            "sequence": 0,
+            "length": 0,
+            "label": 0
+        },
+        "length_stats": {
+            "count": 50813.0,
+            "mean": 35.202644992423195,
+            "std": 19.996424916886614,
+            "min": 1.0,
+            "25%": 20.0,
+            "50%": 35.0,
+            "75%": 44.0,
+            "max": 99.0
+        },
+        "length_distribution_top10": {
+            "36": 1896,
+            "39": 1824,
+            "38": 1712,
+            "37": 1602,
+            "13": 1306,
+            "28": 1270,
+            "35": 1227,
+            "12": 1207,
+            "20": 1206,
+            "29": 1148
+        },
+        "label_distribution": {
+            "0.0": 26047,
+            "1.0": 24766
+        },
+        "label_ratios_percent": {
+            "0.0": 51.26050420168067,
+            "1.0": 48.739495798319325
+        }
+    },
+    "duplicate_removal": {
+        "initial_size": 50813,
+        "final_size": 50813,
+        "removed_count": 0
+    },
+    "length_filtering": {
+        "max_length": 50,
+        "initial_size": 50813,
+        "final_size": 44039,
+        "removed_count": 6774,
+        "length_stats_before": {
+            "count": 50813.0,
+            "mean": 35.202644992423195,
+            "std": 19.996424916886614,
+            "min": 1.0,
+            "25%": 20.0,
+            "50%": 35.0,
+            "75%": 44.0,
+            "max": 99.0
+        },
+        "length_stats_after": {
+            "count": 44039.0,
+            "mean": 29.16608006539658,
+            "std": 12.838915855805789,
+            "min": 1.0,
+            "25%": 18.0,
+            "50%": 31.0,
+            "75%": 39.0,
+            "max": 50.0
+        },
+        "removed_sequences_info": {
+            "count": 6774,
+            "max_length": "99",
+            "min_length": "51"
+        }
+    },
+    "label_grouping": {
+        "0.0": {
+            "count": 23291,
+            "percentage": 52.88721360612184
+        },
+        "1.0": {
+            "count": 20748,
+            "percentage": 47.11278639387815
+        }
+    },
+    "data_split": {
+        "train_size": 30827,
+        "val_size": 6606,
+        "test_size": 6606,
+        "total_size": 44039,
+        "train_percentage": 69.99931878562184,
+        "val_percentage": 15.000340607189083,
+        "test_percentage": 15.000340607189083,
+        "label_distribution": {
+            "train": {
+                "0.0": "16289",
+                "1.0": "14538"
+            },
+            "val": {
+                "0.0": "3530",
+                "1.0": "3076"
+            },
+            "test": {
+                "0.0": "3472",
+                "1.0": "3134"
+            }
+        }
+    },
+    "processing_timestamp": "2025-12-03T18:10:10.531857",
+    "script_version": "1.0.0"
+}

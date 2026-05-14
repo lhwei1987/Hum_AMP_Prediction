@@ -1,0 +1,42 @@
+================================================================================
+数据处理最终报告
+================================================================================
+
+处理时间: 2025-12-03 18:10:10
+
+1. 数据概览
+----------------------------------------
+原始数据总量: 50813
+最终数据总量: 44039
+序列长度限制: 50
+
+2. 数据集划分
+----------------------------------------
+训练集: 30827 (70.0%)
+验证集: 6606 (15.0%)
+测试集: 6606 (15.0%)
+
+3. 标签分布
+----------------------------------------
+训练集: {0.0: np.int64(16289), 1.0: np.int64(14538)}
+验证集: {0.0: np.int64(3530), 1.0: np.int64(3076)}
+测试集: {0.0: np.int64(3472), 1.0: np.int64(3134)}
+
+4. 文件位置
+----------------------------------------
+输出目录: /home/lenovo/PycharmProjects/AMP_Prediction/AMP_Prediction/data/processed_new
+日志文件: /home/lenovo/PycharmProjects/AMP_Prediction/AMP_Prediction/data/logs/data_processing_20251203_181010.log
+训练集: /home/lenovo/PycharmProjects/AMP_Prediction/AMP_Prediction/data/processed_new/train.csv
+验证集: /home/lenovo/PycharmProjects/AMP_Prediction/AMP_Prediction/data/processed_new/val.csv
+测试集: /home/lenovo/PycharmProjects/AMP_Prediction/AMP_Prediction/data/processed_new/test.csv
+合并数据: /home/lenovo/PycharmProjects/AMP_Prediction/AMP_Prediction/data/processed_new/merged_data.csv
+
+5. 序列长度统计
+----------------------------------------
+平均值: 35.2
+标准差: 20.0
+最小值: 1
+25%分位数: 20.0
+中位数: 35.0
+75%分位数: 44.0
+最大值: 99
